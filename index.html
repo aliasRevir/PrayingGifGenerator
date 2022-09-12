@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>sto xx orz</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <script src="https://XiEn1847.github.io/PrayingGifGenerator/gifjs/gif.js"></script>
+</head>
+<body>
+
+<span title="owo!"><h1>Keke Tang Praying Gif Generator</h1></span>
+
+<h2>杂谈</h2>
+
+缝合了一车代码整出来的奇怪小玩意<br/>
+参考的各种内容: 
+<ol>
+        <li><a href="https://yandex.com/search/?text=love+live+superstar+episode+3+no+subtitles">伟大的</a></li>
+        <li><a href="https://zh.clippingmagic.com">抠图的</a></li>
+        <li><a href="https://www.zhangxinxu.com/wordpress/2018/05/js-custom-gif-generate/">有创造力的</a></li>
+        <li><a href="https://www.w3school.com.cn/tiy/t.asp?f=eg_html5_canvas_transform">测参数的</a></li>
+        <li><a href="https://stackoverflow.com/questions/23624269/how-to-draw-an-image-in-trapezium-shape-using-canvas">数学的</a></li>
+        <li><a href="https://www.runoob.com/w3cnote/javascript-promise-object.html">学代码的</a></li>
+        <li><a href="https://blog.csdn.net/sinat_31057219/article/details/70242265">写代码的</a></li>
+        <li><a href="https://docs.fuyeor.com/answer/10090.html">修不好锅的</a></li>
+</ol>
+fun fact: 原图在 lovelive sunshine episode3 的 09:43 处<br/>
+bug: 帧间距小于 20ms 时并不能正常生成（非常快的）gif<br/>
+
+<h2>生成器！</h2>
+
+<ol>
+<li>
+选取一个图像文件: <input type="file" id="fileupl"/><br/>
+<div id="uplresult"></div><br/>
+</li>
+
+<li>
+设置两帧的间隔（现在是 <span id="speedviewer">45</span>ms）:
+<input type="number" id="framespd" placeholder="45" min="1"/>
+<button type="button" onclick="updFrameSpd()">更新</button><br/>
+</li>
+
+<li>
+设置图床：
+<select onChange="changeImgOrigin(this.selectedIndex);">
+<option>luogu（推荐）</option>
+<option>github（GFW 内访问缓慢）</option>
+<option selected="selected">jsdelivr（可能挂掉了）</option>
+</select><br/>
+</li>
+
+
+<li>
+生成 GIF（预计 5~20s）：<button type="button" id="genGIF" disabled=true>点我</button><br/>
+<img class="result-gif" width="667" height="375" src="">
+</li>
+
+</ol>
+
+
+<script type="text/javascript">
+
+var imgb64;
+var imgsrc = 2;
+var delay = 45;
+const w = 667;
+const h = 375;
+
+
+function initImg(name) {
+        return new Promise(resolve => {
+                let img = new Image();
+                img.setAttribute("crossOrigin", "anonymous");
+                img.onload = img.onerror = () => { resolve(img); };
+                img.src = name;
+        })
+}
+
+function createImgRoll(src) {
+        let ret = [];
+        let name = ["", "", "", "", "", "", "", ""], preffix = "";
+        if (src == 0) {
+                name = ["ffxggnnh", "odj4jl2r", "5780sxer", "nv3f0u9v", "5d4vsyf8", "bmohioy4", "l3dpfxv4", "ixjzd5yu"];
+                preffix = "https://cdn.luogu.com.cn/upload/image_hosting/";
+        } else if (src == 1) {
+                name = ["1", "2", "3", "4", "5", "6", "7", "8"];
+                preffix = "https://XiEn1847.github.io/images/pray/";
+        } else if (src == 2) {
+                name = ["1", "2", "3", "4", "5", "6", "7", "8"];
+                preffix = "https://gcore.jsdelivr.net/gh/XiEn1847/XiEn1847.github.io/images/pray/";
+        }
+        for (let i = 0; i <= 7; i++) { ret.push(initImg(preffix + name[i] + ".png")); }
+        for (let i = 6; i >= 1; i--) { ret.push(initImg(preffix + name[i] + ".png")); }
+        return ret;
+}
+
+
+function drawTrapezoidV(ctx, img, x, y, w, h, factor) {
+        var idx = 0, scale = img.width / w;
+        for (; idx < w; idx++) {
+                ctx.drawImage(img, ((idx + 0.5) * scale - 0.5)|0, 0, 1, img.height,
+                                                x + idx, y + (1 - ((w - idx) + idx * factor) / w) * h / 2,
+                                                1, ((w - idx) + idx * factor) / w * h);
+        }
+}
+
+
+function createGif() {
+        let ret = createImgRoll(imgsrc);
+        let praygif = new GIF({
+                                                        width: w,
+                                                        height: h,
+                                                        workers: 2,
+                                                        quality: 10,
+                                                        workerScript: 'https://XiEn1847.github.io/PrayingGifGenerator/gifjs/gif.worker.js'
+                                                });
+
+        let canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        let ctx = canvas.getContext('2d');
+
+        let upimg = new Image();
+        upimg.src = imgb64;
+
+        Promise.all(ret).then(value => {
+                value.forEach((value1, index) => {
+        
+                        // draw
+                        ctx.clearRect(0, 0, w, h);
+                        ctx.setTransform(1, 0.21, 0, 1, 50, -40);
+                        drawTrapezoidV(ctx, upimg, 0, 0, 236, 334, 0.81);
+                        ctx.setTransform(1, 0, 0, 1, 0, 0);
+                        ctx.drawImage(value1, 0, 0);
+        
+                        // insert as frame
+                        praygif.addFrame(ctx, {
+                                delay: delay,
+                                copy: true
+                        });
+                });
+
+                praygif.on('finished', function (blob) {
+                        console.log(blob);
+                        document.querySelector(".result-gif").src = URL.createObjectURL(blob);
+                });
+                praygif.render();
+        });
+}
+
+document.getElementById("genGIF").addEventListener("click", () => {
+        createGif();
+});
+
+
+function ProcessFile(e) {
+        var ufile = document.getElementById('fileupl').files[0];
+        if (ufile) {
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                        imgb64 = event.target.result;
+                        var img = document.createElement("img");
+                        img.src = imgb64;
+                        img.height = 200;
+                        if (document.getElementById("uplresult").hasChildNodes()) {
+                                document.getElementById("uplresult").removeChild(document.getElementById("uplresult").firstChild);
+                        }
+                        document.getElementById("uplresult").appendChild(img);
+                        document.getElementById("genGIF").disabled = false;
+                };
+        }
+        reader.readAsDataURL(ufile);
+}
+
+function contentLoaded() {
+        document.getElementById('fileupl').addEventListener('change', ProcessFile, false);
+}
+
+window.addEventListener("DOMContentLoaded", contentLoaded, false);
+
+function updFrameSpd() {
+        if (document.getElementById('framespd').value >= 1 && document.getElementById('framespd').value <= 1000) {
+                delay = document.getElementById('framespd').value;
+                document.getElementById('speedviewer').innerHTML = delay;
+        }
+}
+
+function changeImgOrigin(new_id) {
+        if (new_id == 0 || new_id == 1 || new_id == 2) { imgsrc = new_id; }
+}
+
+</script>
+</body>
+</html>
