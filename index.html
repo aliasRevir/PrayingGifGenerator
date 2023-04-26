@@ -87,10 +87,10 @@ function createImgRoll(src) {
                 preffix = "https://cdn.luogu.com.cn/upload/image_hosting/";
         } else if (src == 1) {
                 name = ["1", "2", "3", "4", "5", "6", "7", "8"];
-                preffix = "https://XiEn1847.github.io/PrayingGifGenerator/images/pray/";
+                preffix = "https://raw.githubusercontent.com/XiEn1847/PrayingGifGenerator/main/images/pray/";
         } else if (src == 2) {
                 name = ["1", "2", "3", "4", "5", "6", "7", "8"];
-                preffix = "https://gcore.jsdelivr.net/gh/XiEn1847/XiEn1847.github.io/images/pray/";
+                preffix = "https://gcore.jsdelivr.net/gh/XiEn1847/PrayingGifGenerator/main/images/pray/";
         }
         for (let i = 0; i <= 7; i++) { ret.push(initImg(preffix + name[i] + ".png")); }
         for (let i = 6; i >= 1; i--) { ret.push(initImg(preffix + name[i] + ".png")); }
