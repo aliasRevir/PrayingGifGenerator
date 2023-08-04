@@ -29,7 +29,8 @@
 </ol>
 fun fact: 原图在 lovelive sunshine episode3 的 09:43 处<br/>
 bug: 帧间距小于 20ms 时并不能正常生成（非常快的）gif<br/>
-tip: 如果它卡住了，请按 F12 打开“网络”选项卡，然后刷新页面重试，以此检查是否存在网络问题<br/>
+tip: 如何查看进度：刷新页面，按 F12 并打开“网络”选项卡，然后点生成 gif，并在“网络”里看那八张 png 是否正在加载<br/>
+tip: <b>真的很慢很慢！</b>建议国内用户使用科学上网+github图床<br/>
 
 <h2>生成器！</h2>
 <ol>
@@ -46,9 +47,9 @@ tip: 如果它卡住了，请按 F12 打开“网络”选项卡，然后刷新�
                 设置图床：
                 <select onChange="changeImgOrigin(this.selectedIndex);">
                         <option>luogu（挂了）</option>
-                        <option>github</option>
-                        <option>jsdelivr</option>
-                        <option selected="selected">路过图床</option>
+                        <option>github（墙里慢）</option>
+                        <option>jsdelivr（不一定可用）</option>
+                        <option selected="selected">路过图床（墙外慢）</option>
                 </select><br/>
         </li>
         <li>
