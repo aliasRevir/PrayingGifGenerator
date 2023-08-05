@@ -30,7 +30,7 @@
 fun fact: 原图在 lovelive sunshine episode3 的 09:43 处<br/>
 bug: 帧间距小于 20ms 时并不能正常生成（非常快的）gif<br/>
 tip: 如何查看进度：刷新页面，按 F12 并打开“网络”选项卡，然后点生成 gif，并在“网络”里看那八张 png 是否正在加载<br/>
-tip: <b>真的很慢很慢！</b>建议国内用户使用科学上网+github图床<br/>
+tip: <b>真的很慢很慢！</b>建议把图床都试一遍<br/>
 
 <h2>生成器！</h2>
 <ol>
@@ -46,14 +46,15 @@ tip: <b>真的很慢很慢！</b>建议国内用户使用科学上网+github图�
         <li>
                 设置图床：
                 <select onChange="changeImgOrigin(this.selectedIndex);">
-                        <option>luogu（挂了）</option>
-                        <option>github（墙里慢）</option>
-                        <option>jsdelivr（不一定可用）</option>
-                        <option selected="selected">路过图床（墙外慢）</option>
+                        <option selected="selected">洛谷图床</option>
+                        <option>github</option>
+                        <option>jsdelivr cdn</option>
+                        <option>路过图床</option>
+                        <option>codeqihan cdn</option>
                 </select><br/>
         </li>
         <li>
-                生成 GIF（预计 5~20s）：<button type="button" id="genGIF" disabled=true>点我</button><br/>
+                生成 GIF（预计 3~60s，取决于网络环境）：<button type="button" id="genGIF" disabled=true>点我</button><br/>
                 <img class="result-gif" width="667" height="375" src="">
         </li>
 </ol>
@@ -92,6 +93,9 @@ function createImgRoll(src) {
         } else if (src == 3) {
                 name = ["pPktKZ8","pPkt3Gj","pPkt1iQ","pPktMdS","pPktQIg","pPkt8Rs","pPktGzn","pPktYMq"];
                 preffix = "https://s1.ax1x.com/2023/08/05/";
+        } else if (src == 4) {
+                name = ["1", "2", "3", "4", "5", "6", "7", "8"];
+                preffix = "https://jsd.cdn.zzko.cn/gh/XiEn1847/PrayingGifGenerator/images/pray/";
         }
         for (let i = 0; i <= 7; i++) { ret.push(initImg(preffix + name[i] + ".png")); }
         for (let i = 6; i >= 1; i--) { ret.push(initImg(preffix + name[i] + ".png")); }
