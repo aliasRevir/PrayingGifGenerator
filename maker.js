@@ -22,7 +22,7 @@ function createImgRoll(src) {
                 preffix = "https://cdn.luogu.com.cn/upload/image_hosting/";
         } else if (src == 1) {
                 name = ["1", "2", "3", "4", "5", "6", "7", "8"];
-                preffix = "./images/pray/";
+                preffix = "https://XiEn1847.github.io/PrayingGifGenerator/images/pray/";
         } else if (src == 2) {
                 name = ["1", "2", "3", "4", "5", "6", "7", "8"];
                 preffix = "https://gcore.jsdelivr.net/gh/XiEn1847/PrayingGifGenerator/images/pray/";
@@ -57,7 +57,7 @@ function createGif() {
                                                         height: h,
                                                         workers: 2,
                                                         quality: 10,
-                                                        workerScript: './gifjs/gif.worker.js'
+                                                        workerScript: 'https://XiEn1847.github.io/PrayingGifGenerator/gifjs/gif.worker.js'
                                                 });
 
         let canvas = document.createElement('canvas');
