@@ -54,7 +54,7 @@ tip: <b>真的很慢很慢！</b>建议把图床都试一遍<br/>
                 </select><br/>
         </li>
         <li>
-                生成 GIF（预计 3~60s，取决于网络环境）：<button type="button" id="genGIF" disabled=true>点我</button><div id="genstatus"></div><br/>
+                生成 GIF（预计 3~60s，取决于网络环境）：<button type="button" id="genGIF" disabled=true>点我</button><div id="genstatus1"></div><div id="genstatus2"></div><div id="genstatus3"></div><br/>
                 <img class="result-gif" width="667" height="375" src="">
         </li>
 </ol>
@@ -73,7 +73,7 @@ function initImg(name) {
         return new Promise(resolve => {
                 let img = new Image();
                 img.setAttribute("crossOrigin", "anonymous");
-                img.onload = img.onerror = () => { resolve(img); document.getElementById("uplresult").innerText += "1"; };
+                img.onload = img.onerror = () => { resolve(img); document.getElementById("genstatus2").innerText = toString(parseInt(document.getElementById("genstatus2").innerText) + 1); };
                 img.src = name;
         })
 }
@@ -114,7 +114,9 @@ function drawTrapezoidV(ctx, img, x, y, w, h, factor) {
 
 
 function createGif() {
-        document.getElementById("uplresult").innerText = "loading images:";
+        document.getElementById("genstatus1").innerText = "loading images:";
+        document.getElementById("genstatus2").innerText = "0";
+        document.getElementById("genstatus3").innerText = "/14";
         let ret = createImgRoll(imgsrc);
         let praygif = new GIF({
                                                         width: w,
