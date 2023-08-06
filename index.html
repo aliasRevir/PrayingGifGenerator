@@ -54,7 +54,7 @@ tip: <b>真的很慢很慢！</b>建议把图床都试一遍<br/>
                 </select><br/>
         </li>
         <li>
-                生成 GIF（预计 3~60s，取决于网络环境）：<button type="button" id="genGIF" disabled=true>点我</button><br/>
+                生成 GIF（预计 3~60s，取决于网络环境）：<button type="button" id="genGIF" disabled=true>点我</button><div id="genstatus"></div><br/>
                 <img class="result-gif" width="667" height="375" src="">
         </li>
 </ol>
@@ -73,7 +73,7 @@ function initImg(name) {
         return new Promise(resolve => {
                 let img = new Image();
                 img.setAttribute("crossOrigin", "anonymous");
-                img.onload = img.onerror = () => { resolve(img); };
+                img.onload = img.onerror = () => { resolve(img); document.getElementById("uplresult").innerText += "1"; };
                 img.src = name;
         })
 }
@@ -114,6 +114,7 @@ function drawTrapezoidV(ctx, img, x, y, w, h, factor) {
 
 
 function createGif() {
+        document.getElementById("uplresult").innerText = "loading images:";
         let ret = createImgRoll(imgsrc);
         let praygif = new GIF({
                                                         width: w,
@@ -194,7 +195,7 @@ function updFrameSpd() {
 }
 
 function changeImgOrigin(new_id) {
-        if (new_id == 0 || new_id == 1 || new_id == 2 || new_id == 3) { imgsrc = new_id; }
+        if (new_id == 0 || new_id == 1 || new_id == 2 || new_id == 3 || new_id == 4) { imgsrc = new_id; }
 }
 
 </script>
