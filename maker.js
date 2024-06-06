@@ -57,7 +57,7 @@ function createGif() {
                                                         height: h,
                                                         workers: 2,
                                                         quality: 10,
-                                                        workerScript: '/gifjs/gif.worker.js'
+                                                        workerScript: 'https://aliasrevir.github.io/PrayingGifGenerator/gifjs/gif.worker.js'
                                                 });
 
         let canvas = document.createElement('canvas');
