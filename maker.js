@@ -22,16 +22,16 @@ function createImgRoll(src) {
                 preffix = "https://cdn.luogu.com.cn/upload/image_hosting/";
         } else if (src == 1) {
                 name = ["1", "2", "3", "4", "5", "6", "7", "8"];
-                preffix = "https://XiEn1847.github.io/PrayingGifGenerator/images/pray/";
+                preffix = "https://aliasrevir.github.io/PrayingGifGenerator/images/pray/";
         } else if (src == 2) {
                 name = ["1", "2", "3", "4", "5", "6", "7", "8"];
-                preffix = "https://gcore.jsdelivr.net/gh/XiEn1847/PrayingGifGenerator/images/pray/";
+                preffix = "https://gcore.jsdelivr.net/gh/aliasrevir/PrayingGifGenerator/images/pray/";
         } else if (src == 3) {
                 name = ["pPktKZ8","pPkt3Gj","pPkt1iQ","pPktMdS","pPktQIg","pPkt8Rs","pPktGzn","pPktYMq"];
                 preffix = "https://s1.ax1x.com/2023/08/05/";
         } else if (src == 4) {
                 name = ["1", "2", "3", "4", "5", "6", "7", "8"];
-                preffix = "https://jsd.cdn.zzko.cn/gh/XiEn1847/PrayingGifGenerator/images/pray/";
+                preffix = "https://jsd.cdn.zzko.cn/gh/aliasrevir/PrayingGifGenerator/images/pray/";
         }
         for (let i = 0; i <= 7; i++) { ret.push(initImg(preffix + name[i] + ".png")); }
         for (let i = 6; i >= 1; i--) { ret.push(initImg(preffix + name[i] + ".png")); }
@@ -57,7 +57,7 @@ function createGif() {
                                                         height: h,
                                                         workers: 2,
                                                         quality: 10,
-                                                        workerScript: 'https://XiEn1847.github.io/PrayingGifGenerator/gifjs/gif.worker.js'
+                                                        workerScript: '/gifjs/gif.worker.js'
                                                 });
 
         let canvas = document.createElement('canvas');
